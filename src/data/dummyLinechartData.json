@@ -1,0 +1,9 @@
+[
+    { "name": "월", "value": 120 },
+    { "name": "화", "value": 200 },
+    { "name": "수", "value": 150 },
+    { "name": "목", "value": 100 },
+    { "name": "금", "value": 250 },
+    { "name": "토", "value": 100 },
+    { "name": "일", "value": 170 }
+]
