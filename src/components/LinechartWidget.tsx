@@ -8,11 +8,13 @@ import {
     ResponsiveContainer,
 } from 'recharts';
 import dummyLineChartData from '../data/dummyLinechartData.json';
-import { ChartTitle, BaseBg } from '../styles/widget-style';
+import { ChartTitle } from '../styles/widget-style';
+import BaseWidget from './BaseWidget';
+import { WidgetProps } from '../types/widgetTypes';
 
-const LinechartWidget = () => {
+const LinechartWidget = ({ widget, children }: WidgetProps) => {
     return (
-        <BaseBg>
+        <BaseWidget widget={widget}>
             <ChartTitle>주간 데이터 라인 차트</ChartTitle>
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={dummyLineChartData} margin={{ top: 5, right: 5 }}>
@@ -29,7 +31,7 @@ const LinechartWidget = () => {
                     />
                 </LineChart>
             </ResponsiveContainer>
-        </BaseBg>
+        </BaseWidget>
     );
 };
 

@@ -1,14 +1,12 @@
-import { BaseBg, TextBlock } from '../styles/widget-style';
+import { TextBlock } from '../styles/widget-style';
+import { WidgetProps } from '../types/widgetTypes';
+import BaseWidget from './BaseWidget';
 
-interface TextBlockWidgetProps {
-    content: string;
-}
-
-const TextBlockWidget = ({ content }: TextBlockWidgetProps) => {
+const TextBlockWidget = ({ widget, children }: WidgetProps) => {
     return (
-        <BaseBg>
-            <TextBlock value={content} />
-        </BaseBg>
+        <BaseWidget widget={widget}>
+            <TextBlock value={widget.props.content} />
+        </BaseWidget>
     );
 };
 

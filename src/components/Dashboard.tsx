@@ -13,11 +13,11 @@ const Dashboard = () => {
         return widgets.map((widget) => {
             switch (widget.type) {
                 case 'chart':
-                    return <LinechartWidget key={widget.id} />;
+                    return <LinechartWidget key={widget.id} widget={widget} />;
                 case 'table':
-                    return <TableWidget key={widget.id} />;
+                    return <TableWidget key={widget.id} widget={widget} />;
                 case 'text':
-                    return <TextBlockWidget key={widget.id} content={widget.props.content} />;
+                    return <TextBlockWidget key={widget.id} widget={widget} />;
             }
         });
     };

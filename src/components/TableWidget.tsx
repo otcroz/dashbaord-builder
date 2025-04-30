@@ -1,9 +1,11 @@
-import { StyledCell, StyledTable, BaseBg } from '../styles/widget-style';
+import { StyledCell, StyledTable } from '../styles/widget-style';
 import dummyData from '../data/dummyTableData.json';
+import BaseWidget from './BaseWidget';
+import { WidgetProps } from '../types/widgetTypes';
 
-const TableWidget = () => {
+const TableWidget = ({ widget, children }: WidgetProps) => {
     return (
-        <BaseBg>
+        <BaseWidget widget={widget}>
             <StyledTable>
                 <tbody>
                     {dummyData.map((row, rowIdx) => (
@@ -15,7 +17,7 @@ const TableWidget = () => {
                     ))}
                 </tbody>
             </StyledTable>
-        </BaseBg>
+        </BaseWidget>
     );
 };
 

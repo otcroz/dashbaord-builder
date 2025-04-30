@@ -1,5 +1,5 @@
 // 컴포넌트 스타일 정의
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const GridBg = styled.div`
     width: 100vw;
