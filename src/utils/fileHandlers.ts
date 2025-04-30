@@ -1,4 +1,4 @@
-import { useWidgetStore } from '../state/store';
+import { useWidgetStore } from '../state/widgetStore';
 import { Widget } from '../types/base';
 
 // IndexedDB에 data 저장
