@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BaseBg } from '../styles/widget-style';
 import { ResizeProps, WidgetProps } from '../types/widgetTypes';
-import { handleMouseDown, handleMouseMove, handleMouseUp } from '../utils/handlers';
+import { handleMouseDown, handleMouseMove, handleMouseUp } from '../utils/mouseHandlers';
 
 const BaseWidget = ({ widget, children }: WidgetProps) => {
     const { size, position } = widget;

@@ -4,6 +4,7 @@ import TextBlockWidget from './TextBlockWidget';
 import { ButtonBox, Button, GridBg, Menubox, Menu } from '../styles/base-style';
 import { useState } from 'react';
 import { useWidgetStore } from '../state/store';
+import { loadJSONFile, saveJSONFile } from '../utils/fileHandlers';
 
 const Dashboard = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -27,8 +28,8 @@ const Dashboard = () => {
             {loadWidgets()}
             <ButtonBox>
                 <Button>모드</Button>
-                <Button>현재 상태 저장하기</Button>
-                <Button>불러오기</Button>
+                <Button onClick={() => saveJSONFile()}>현재 상태 저장하기</Button>
+                <Button onClick={() => loadJSONFile()}>위젯 불러오기</Button>
                 <Button onClick={() => setIsOpen(!isOpen)}>위젯 추가</Button>
             </ButtonBox>
             <Menubox style={isOpen ? { display: 'block' } : { display: 'none' }}>

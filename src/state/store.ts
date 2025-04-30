@@ -4,6 +4,7 @@ import { Widget } from '../types/base';
 interface WidgetListStore {
     widgets: Widget[];
     addWidget: (type: string) => void;
+    setWidget: (widgets: Widget[]) => void;
     setSize: (id: string, w: number, h: number) => void;
     setPosition: (id: string, x: number, y: number) => void;
 }
@@ -21,13 +22,16 @@ export const useWidgetStore = create<WidgetListStore>((set) => ({
                         x: Math.floor(Math.random() * 800),
                         y: Math.floor(Math.random() * 600),
                     },
-                    size: { w: 100, h: 100 },
+                    size: { w: 300, h: 300 },
                     props: {
                         content: '',
                     },
                 } as Widget,
             ],
         }));
+    },
+    setWidget: (widgets: Widget[]) => {
+        set({ widgets: widgets });
     },
     setSize: (id, w, h) => {
         set((state) => ({
