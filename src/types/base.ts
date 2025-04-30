@@ -3,7 +3,7 @@ export interface Widget {
     type: string; // chart, table, text
     position: Position;
     size: Size;
-    //props: // type 마다 들어갈 내용이 달라짐.
+    props: TextProps; // ChartProps | TableProps | TextProps;
 }
 
 export interface Position {
@@ -14,4 +14,8 @@ export interface Position {
 export interface Size {
     w: number;
     h: number;
+}
+
+interface TextProps {
+    content: string;
 }

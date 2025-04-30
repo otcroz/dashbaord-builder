@@ -14,7 +14,7 @@ export const BaseBg = styled.div`
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
 `;
 
-// 테이블 위젯 스타일일
+// 테이블 위젯 스타일
 export const StyledTable = styled.table`
     border-collapse: collapse;
 `;
@@ -27,8 +27,8 @@ export const StyledCell = styled.td`
 
 // 텍스트 블록 위젯 스타일
 export const TextBlock = styled.textarea`
-    width: 100vw;
-    height: 100vw;
+    width: 100%;
+    height: 100%;
     border: none;
     resize: none;
     white-space: pre-wrap;

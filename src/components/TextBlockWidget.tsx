@@ -1,9 +1,13 @@
 import { BaseBg, TextBlock } from '../styles/widget-style';
 
-const TextBlockWidget = () => {
+interface TextBlockWidgetProps {
+    content: string;
+}
+
+const TextBlockWidget = ({ content }: TextBlockWidgetProps) => {
     return (
         <BaseBg>
-            <TextBlock />
+            <TextBlock value={content} />
         </BaseBg>
     );
 };
