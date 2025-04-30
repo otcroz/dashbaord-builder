@@ -5,9 +5,8 @@ export const GridBg = styled.div`
     width: 100vw;
     height: 100vh;
 
-    background-color: white;
     background-image: linear-gradient(to right, #ccc 1px, transparent 1px),
-        linear-gradient(to bottom, #ccc 1px, transparent 1px);
+        linear-gradient(to bottom, rgb(131, 129, 129) 1px, transparent 1px);
     background-size: 40px 40px;
 `;
 
@@ -16,7 +15,7 @@ export const ButtonBox = styled.div`
     position: absolute;
     top: 1rem;
     right: 1rem;
-
+    background-color: transparent;
     display: flex;
     gap: 1rem;
 `;

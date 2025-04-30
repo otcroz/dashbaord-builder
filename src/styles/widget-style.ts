@@ -16,7 +16,8 @@ export const BaseBg = styled.div<WidgetStyleProps>`
 
     width: ${(props) => props.w}px;
     height: ${(props) => props.h}px;
-    background-color: white;
+
+    background-color: ${(props) => props.theme.widgetColor};
     padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
@@ -45,6 +46,6 @@ export const TextBlock = styled.textarea`
 // 라인 차트 위젯 스타일
 export const ChartTitle = styled.h3`
     margin-bottom: 0.8rem;
-    color: black;
     font-size: 1rem;
+    background-color: transparent;
 `;
