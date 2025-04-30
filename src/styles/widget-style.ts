@@ -14,8 +14,8 @@ export const BaseBg = styled.div<WidgetStyleProps>`
     justify-content: center;
     align-items: center;
 
-    width: 200px;
-    height: 200px;
+    width: ${(props) => props.w}px;
+    height: ${(props) => props.h}px;
     background-color: white;
     padding: 1rem;
     border-radius: 1rem;

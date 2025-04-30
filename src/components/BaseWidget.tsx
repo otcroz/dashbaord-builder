@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BaseBg } from '../styles/widget-style';
-import { WidgetProps } from '../types/widgetTypes';
+import { ResizeProps, WidgetProps } from '../types/widgetTypes';
 import { handleMouseDown, handleMouseMove, handleMouseUp } from '../utils/handlers';
 
 const BaseWidget = ({ widget, children }: WidgetProps) => {
@@ -15,6 +15,14 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
     const [draggedWidgetId, setDraggedWidgetId] = useState<string | null>(null);
     const [offset, setOffset] = useState({ offsetX: 0, offsetY: 0 });
 
+    const [isResizing, setIsResizing] = useState(false);
+    const [resizeDirection, setResizeDirection] = useState<ResizeProps>({
+        left: false,
+        right: false,
+        top: false,
+        bottom: false,
+    });
+
     return (
         <div
             onMouseDown={(e) =>
@@ -24,18 +32,31 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
                     setOffset,
                     setDraggedWidgetId,
                     localPosition,
+                    setIsResizing,
+                    setResizeDirection,
                     widget.id,
                 )
             }
             onMouseMove={(e) =>
-                handleMouseMove(e, isDragging, localPosition, setLocalPosition, offset)
+                handleMouseMove(
+                    e,
+                    isDragging,
+                    localPosition,
+                    setLocalPosition,
+                    offset,
+                    isResizing,
+                    resizeDirection,
+                )
             }
             onMouseUp={() =>
                 handleMouseUp(
                     isDragging,
+                    isResizing,
                     draggedWidgetId,
                     localPosition,
                     setIsDragging,
+                    setIsResizing,
+                    setResizeDirection,
                     setDraggedWidgetId,
                 )
             }

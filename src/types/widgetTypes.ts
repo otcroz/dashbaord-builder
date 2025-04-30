@@ -11,3 +11,10 @@ export interface WidgetStyleProps {
     w: number;
     h: number;
 }
+
+export interface ResizeProps {
+    left: boolean;
+    right: boolean;
+    top: boolean;
+    bottom: boolean;
+}
