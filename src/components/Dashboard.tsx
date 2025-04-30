@@ -2,7 +2,7 @@ import LinechartWidget from './LinechartWidget';
 import TableWidget from './TableWidget';
 import TextBlockWidget from './TextBlockWidget';
 import { ButtonBox, Button, GridBg, Menubox, Menu } from '../styles/base-style';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useWidgetStore } from '../state/widgetStore';
 import { loadJSONFile, saveJSONFile } from '../utils/fileHandlers';
 import { changeTheme } from '../utils/themeHandlers';
