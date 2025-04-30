@@ -123,7 +123,6 @@ export const handleMouseUp = (
     }
     setIsDragging(false);
     setDraggedWidgetId(null);
-
     //console.log('end isResizing: ', isResizing);
     //console.log('end isDragging: ', isDragging);
 };
