@@ -3,14 +3,26 @@ import { Widget } from '../types/base';
 
 interface WidgetListStore {
     widgets: Widget[];
+    bringToFront: (id: string) => void;
     addWidget: (type: string) => void;
     setWidget: (widgets: Widget[]) => void;
     setSize: (id: string, w: number, h: number) => void;
     setPosition: (id: string, x: number, y: number) => void;
 }
 
-export const useWidgetStore = create<WidgetListStore>((set) => ({
+export const useWidgetStore = create<WidgetListStore>((set, get) => ({
     widgets: [],
+    bringToFront: (id: string) => {
+        set((state) => ({
+            widgets: state.widgets.map((widget) => ({
+                ...widget,
+                props: {
+                    ...widget.props,
+                    zIndex: widget.id === id ? 9999 : 1,
+                },
+            })),
+        }));
+    },
     addWidget: (type: string) => {
         set((state) => ({
             widgets: [
@@ -25,6 +37,7 @@ export const useWidgetStore = create<WidgetListStore>((set) => ({
                     size: { w: 300, h: 300 },
                     props: {
                         content: '',
+                        zIndex: 1,
                     },
                 } as Widget,
             ],

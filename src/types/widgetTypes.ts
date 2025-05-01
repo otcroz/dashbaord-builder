@@ -10,6 +10,7 @@ export interface WidgetStyleProps {
     y: number;
     w: number;
     h: number;
+    zindex: number;
 }
 
 export interface ResizeProps {

@@ -5,7 +5,7 @@ export const BaseBg = styled.div<WidgetStyleProps>`
     position: absolute;
     top: ${(props) => props.y}px;
     left: ${(props) => props.x}px;
-    z-index: 1;
+    z-index: ${(props) => props.zindex};
     cursor: move;
     overflow: hidden;
 

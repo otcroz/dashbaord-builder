@@ -61,7 +61,13 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
                 )
             }
         >
-            <BaseBg x={localPosition.x} y={localPosition.y} w={localPosition.w} h={localPosition.h}>
+            <BaseBg
+                x={localPosition.x}
+                y={localPosition.y}
+                w={localPosition.w}
+                h={localPosition.h}
+                zindex={widget.props.zIndex}
+            >
                 {children}
             </BaseBg>
         </div>

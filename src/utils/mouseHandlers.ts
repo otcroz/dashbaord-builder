@@ -12,9 +12,14 @@ export const handleMouseDown = (
     setResizeDirection: Dispatch<SetStateAction<ResizeProps>>,
     widgetId: string,
 ) => {
+    // 드래그 설정
     e.stopPropagation();
     setIsDragging(true);
     setDraggedWidgetId(widgetId);
+
+    // 가장 앞으로 배치
+    const { bringToFront } = useWidgetStore.getState();
+    bringToFront(widgetId);
 
     // 마우스 위치 클릭, 위젯 좌표 간 오프셋 계산
     const offsetX = e.clientX - localPosition.x;
