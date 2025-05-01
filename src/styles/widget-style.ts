@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 import { WidgetStyleProps } from '../types/widgetTypes';
 
-export const BaseBg = styled.div<WidgetStyleProps>`
+export const BaseBg = styled.div.attrs<WidgetStyleProps>((props) => ({
+    style: {
+        top: `${props.$y}px`,
+        left: `${props.$x}px`,
+        zIndex: `${props.$zindex}`,
+        width: `${props.$w}px`,
+        height: `${props.$h}px`,
+    },
+}))`
     position: absolute;
-    top: ${(props) => props.y}px;
-    left: ${(props) => props.x}px;
-    z-index: ${(props) => props.zindex};
+
     cursor: move;
     overflow: hidden;
 
@@ -13,9 +19,6 @@ export const BaseBg = styled.div<WidgetStyleProps>`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    width: ${(props) => props.w}px;
-    height: ${(props) => props.h}px;
 
     background-color: ${(props) => props.theme.widgetColor};
     padding: 1rem;
