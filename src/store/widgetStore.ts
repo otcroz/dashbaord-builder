@@ -4,6 +4,7 @@ import { Widget } from '../types/base';
 interface WidgetListStore {
     widgets: Widget[];
     bringToFront: (id: string) => void;
+    getWidgetId: (id: string) => Widget;
     addWidget: (type: string) => void;
     setWidget: (widgets: Widget[]) => void;
     setSize: (id: string, w: number, h: number) => void;
@@ -22,6 +23,11 @@ export const useWidgetStore = create<WidgetListStore>((set, get) => ({
                 },
             })),
         }));
+    },
+    getWidgetId: (id: string) => {
+        const widget = get().widgets.find((w) => w.id === id);
+        if (!widget) throw new Error(`Widget with id ${id} not found`);
+        return widget;
     },
     addWidget: (type: string) => {
         set((state) => ({
