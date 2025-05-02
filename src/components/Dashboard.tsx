@@ -1,7 +1,7 @@
 import LinechartWidget from './LinechartWidget';
 import TableWidget from './TableWidget';
 import TextBlockWidget from './TextBlockWidget';
-import { ButtonBox, Button, GridBg, Menubox, Menu } from '../styles/base';
+import { ButtonBox, Button, Menubox, Menu } from '../styles/base';
 import { useState } from 'react';
 import { useWidgetStore } from '../store/widgetStore';
 import { loadJSONFile, saveJSONFile } from '../utils/fileHandlers';
@@ -32,7 +32,7 @@ const Dashboard = () => {
     };
 
     return (
-        <GridBg>
+        <>
             {loadWidgets()}
             <ButtonBox>
                 <Button onClick={() => (theme == 'light' ? setTheme('dark') : setTheme('light'))}>
@@ -47,7 +47,7 @@ const Dashboard = () => {
                 <Menu onClick={() => addWidget('table')}>테이블</Menu>
                 <Menu onClick={() => addWidget('text')}>텍스트 블록</Menu>
             </Menubox>
-        </GridBg>
+        </>
     );
 };
 

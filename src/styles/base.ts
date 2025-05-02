@@ -1,15 +1,6 @@
 // 컴포넌트 스타일 정의
 import styled from 'styled-components';
 
-export const GridBg = styled.div`
-    width: 100vw;
-    height: 100vh;
-
-    background-image: linear-gradient(to right, #ccc 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(131, 129, 129) 1px, transparent 1px);
-    background-size: 40px 40px;
-`;
-
 // 버튼 스타일
 export const ButtonBox = styled.div`
     position: absolute;
