@@ -1,9 +1,7 @@
-import { useWidgetStore } from '../state/widgetStore';
 import { Widget } from '../types/base';
 
 // IndexedDB에 data 저장
-export const saveJSONFile = () => {
-    const { widgets } = useWidgetStore.getState();
+export const saveJSONFile = (widgets: Widget[]) => {
     const request = window.indexedDB.open('widgetDB', 2);
 
     // DB 초기 생성
@@ -31,8 +29,7 @@ export const saveJSONFile = () => {
 };
 
 // IndexedDB에 저장된 data 불러오기
-export const loadJSONFile = () => {
-    const { setWidget } = useWidgetStore.getState();
+export const loadJSONFile = (setWidget: (widgets: Widget[]) => void) => {
     const request = window.indexedDB.open('widgetDB', 2);
     request.onsuccess = (event) => {
         const db = (event.target as IDBOpenDBRequest).result;

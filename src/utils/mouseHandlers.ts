@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { useWidgetStore } from '../state/widgetStore';
+import { useWidgetStore } from '../store/widgetStore';
 import { ResizeProps } from '../types/widgetTypes';
 
 export const handleMouseDown = (
@@ -11,6 +11,7 @@ export const handleMouseDown = (
     setIsResizing: Dispatch<SetStateAction<boolean>>,
     setResizeDirection: Dispatch<SetStateAction<ResizeProps>>,
     widgetId: string,
+    bringToFront: (id: string) => void,
 ) => {
     // 드래그 설정
     e.stopPropagation();
@@ -18,7 +19,6 @@ export const handleMouseDown = (
     setDraggedWidgetId(widgetId);
 
     // 가장 앞으로 배치
-    const { bringToFront } = useWidgetStore.getState();
     bringToFront(widgetId);
 
     // 마우스 위치 클릭, 위젯 좌표 간 오프셋 계산
@@ -105,10 +105,11 @@ export const handleMouseUp = (
     setIsResizing: Dispatch<SetStateAction<boolean>>,
     setResizeDirection: Dispatch<SetStateAction<ResizeProps>>,
     setDraggedWidgetId: Dispatch<SetStateAction<string | null>>,
+    setSize: (id: string, w: number, h: number) => void,
+    setPosition: (id: string, x: number, y: number) => void,
 ) => {
     if (isResizing && draggedWidgetId != null) {
         // 사이즈 상태 업데이트
-        const { setSize } = useWidgetStore.getState();
         const w = localPosition.w;
         const h = localPosition.h;
         setSize(draggedWidgetId, w, h);
@@ -121,13 +122,10 @@ export const handleMouseUp = (
         });
     } else if (isDragging && draggedWidgetId != null) {
         // 드래그 상태 업데이트
-        const { setPosition } = useWidgetStore.getState();
         const x = localPosition.x;
         const y = localPosition.y;
         setPosition(draggedWidgetId, x, y);
     }
     setIsDragging(false);
     setDraggedWidgetId(null);
-    //console.log('end isResizing: ', isResizing);
-    //console.log('end isDragging: ', isDragging);
 };
