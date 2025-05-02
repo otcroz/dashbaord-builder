@@ -12,7 +12,7 @@ import { ChartTitle } from '../styles/widget-style';
 import BaseWidget from './BaseWidget';
 import { WidgetProps } from '../types/widgetTypes';
 
-const LinechartWidget = ({ widget, children }: WidgetProps) => {
+const LinechartWidget = ({ widget }: WidgetProps) => {
     return (
         <BaseWidget widget={widget}>
             <ChartTitle>주간 데이터 라인 차트</ChartTitle>

@@ -1,9 +1,9 @@
 import './App.css';
 import Dashboard from './components/Dashboard';
 import { ThemeProvider } from 'styled-components';
-import { useThemeStore } from './state/themeStore';
+import { useThemeStore } from './store/themeStore';
 import { lightTheme, darkTheme } from './styles/theme';
-import { GlobalStyle } from './styles/globalStyle';
+import { GlobalStyle } from './styles/global';
 
 function App() {
     const { theme } = useThemeStore();

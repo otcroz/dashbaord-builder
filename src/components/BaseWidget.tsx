@@ -2,15 +2,26 @@ import { useState } from 'react';
 import { BaseBg } from '../styles/widget-style';
 import { ResizeProps, WidgetProps } from '../types/widgetTypes';
 import { handleMouseDown, handleMouseMove, handleMouseUp } from '../utils/mouseHandlers';
+import { useWidgetStore } from '../store/widgetStore';
+import { useShallow } from 'zustand/react/shallow';
+import { memo } from 'react';
+import { areEqual } from '../utils/iswidgetEqual';
 
 const BaseWidget = ({ widget, children }: WidgetProps) => {
-    const { size, position } = widget;
+    const { setPosition, setSize, bringToFront } = useWidgetStore(
+        useShallow((state) => ({
+            setPosition: state.setPosition,
+            setSize: state.setSize,
+            bringToFront: state.bringToFront,
+        })),
+    );
+
     const [isDragging, setIsDragging] = useState(false);
     const [localPosition, setLocalPosition] = useState({
-        x: position.x,
-        y: position.y,
-        w: size.w,
-        h: size.h,
+        x: widget.position.x,
+        y: widget.position.y,
+        w: widget.size.w,
+        h: widget.size.h,
     });
     const [draggedWidgetId, setDraggedWidgetId] = useState<string | null>(null);
     const [offset, setOffset] = useState({ offsetX: 0, offsetY: 0 });
@@ -35,6 +46,7 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
                     setIsResizing,
                     setResizeDirection,
                     widget.id,
+                    bringToFront,
                 )
             }
             onMouseMove={(e) =>
@@ -58,15 +70,17 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
                     setIsResizing,
                     setResizeDirection,
                     setDraggedWidgetId,
+                    setSize,
+                    setPosition,
                 )
             }
         >
             <BaseBg
-                x={localPosition.x}
-                y={localPosition.y}
-                w={localPosition.w}
-                h={localPosition.h}
-                zindex={widget.props.zIndex}
+                $x={localPosition.x}
+                $y={localPosition.y}
+                $w={localPosition.w}
+                $h={localPosition.h}
+                $zindex={widget.props.zIndex}
             >
                 {children}
             </BaseBg>
@@ -74,4 +88,4 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
     );
 };
 
-export default BaseWidget;
+export default memo(BaseWidget, areEqual);
