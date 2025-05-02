@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction } from 'react';
-import { useWidgetStore } from '../store/widgetStore';
 import { ResizeProps } from '../types/widgetTypes';
 
 export const handleMouseDown = (

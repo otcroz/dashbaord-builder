@@ -1,4 +1,3 @@
-import './App.css';
 import Dashboard from './components/Dashboard';
 import { ThemeProvider } from 'styled-components';
 import { useThemeStore } from './store/themeStore';

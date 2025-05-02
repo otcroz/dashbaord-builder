@@ -3,7 +3,7 @@ import dummyData from '../data/dummyTableData.json';
 import BaseWidget from './BaseWidget';
 import { WidgetProps } from '../types/widgetTypes';
 
-const TableWidget = ({ widget, children }: WidgetProps) => {
+const TableWidget = ({ widget }: WidgetProps) => {
     return (
         <BaseWidget widget={widget}>
             <StyledTable>
