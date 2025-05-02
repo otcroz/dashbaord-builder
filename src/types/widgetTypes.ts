@@ -6,11 +6,11 @@ export interface WidgetProps {
 }
 
 export interface WidgetStyleProps {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-    zindex: number;
+    $x: number;
+    $y: number;
+    $w: number;
+    $h: number;
+    $zindex: number;
 }
 
 export interface ResizeProps {
