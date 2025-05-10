@@ -9,6 +9,7 @@ interface WidgetListStore {
     setWidget: (widgets: Widget[]) => void;
     setSize: (id: string, w: number, h: number) => void;
     setPosition: (id: string, x: number, y: number) => void;
+    updateContent: (id: string, content: string) => void;
 }
 
 export const useWidgetStore = create<WidgetListStore>((set, get) => ({
@@ -63,6 +64,15 @@ export const useWidgetStore = create<WidgetListStore>((set, get) => ({
         set((state) => ({
             widgets: state.widgets.map((widget) =>
                 widget.id === id ? { ...widget, position: { x, y } } : widget,
+            ),
+        }));
+    },
+    updateContent: (id, content) => {
+        set((state) => ({
+            widgets: state.widgets.map((widget) =>
+                widget.id === id
+                    ? { ...widget, props: { content: content, zIndex: 9999 } }
+                    : widget,
             ),
         }));
     },

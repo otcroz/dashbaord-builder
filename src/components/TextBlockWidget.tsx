@@ -1,22 +1,24 @@
-import { useState } from 'react';
 import { TextBlock } from '../styles/widget-style';
 import { WidgetProps } from '../types/widgetTypes';
 import BaseWidget from './BaseWidget';
+import { useWidgetStore } from '../store/widgetStore';
 
 const TextBlockWidget = ({ widget }: WidgetProps) => {
-    const [text, setText] = useState(widget.props.content);
+    const updateContent = useWidgetStore((state) => state.updateContent);
+
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setText(e.target.value);
+        console.log(e.target.value);
+        updateContent(widget.id, e.target.value);
     };
 
     // 텍스트 입력 완료 후 전역 상태에 저장
     const handleBlur = () => {
-        widget.props.content = text;
+        updateContent(widget.id, widget.props.content);
     };
 
     return (
         <BaseWidget widget={widget}>
-            <TextBlock value={text} onChange={handleChange} onBlur={handleBlur} />
+            <TextBlock value={widget.props.content} onChange={handleChange} onBlur={handleBlur} />
         </BaseWidget>
     );
 };
