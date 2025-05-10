@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { ResizeProps, ResizingPositionProps, widgetPositionProps } from '../types/widgetTypes';
 
-const padding = 10;
+const padding = 20;
 
 export const handleMouseDown = (
     e: React.MouseEvent,
