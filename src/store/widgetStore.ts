@@ -41,7 +41,7 @@ export const useWidgetStore = create<WidgetListStore>((set, get) => ({
                         x: Math.floor(Math.random() * 800),
                         y: Math.floor(Math.random() * 600),
                     },
-                    size: { w: 300, h: 300 },
+                    size: { w: 400, h: 400 },
                     props: {
                         content: '',
                         zIndex: 1,

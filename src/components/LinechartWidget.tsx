@@ -16,7 +16,7 @@ const LinechartWidget = ({ widget }: WidgetProps) => {
     return (
         <BaseWidget widget={widget}>
             <ChartTitle>주간 데이터 라인 차트</ChartTitle>
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="90%" height="80%">
                 <LineChart data={dummyLineChartData} margin={{ top: 5, right: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="line" />
