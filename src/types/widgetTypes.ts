@@ -19,3 +19,19 @@ export interface ResizeProps {
     top: boolean;
     bottom: boolean;
 }
+
+export interface widgetPositionProps {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+}
+
+export interface ResizingPositionProps {
+    x: number;
+    y: number;
+    w: number;
+    h: number;
+    mouseX: number;
+    mouseY: number;
+}

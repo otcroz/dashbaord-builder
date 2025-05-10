@@ -33,6 +33,14 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
         top: false,
         bottom: false,
     });
+    const [startResizing, setStartResizing] = useState({
+        x: 0,
+        y: 0,
+        w: 0,
+        h: 0,
+        mouseX: 0,
+        mouseY: 0,
+    });
 
     return (
         <div
@@ -47,6 +55,7 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
                     setResizeDirection,
                     widget.id,
                     bringToFront,
+                    setStartResizing,
                 )
             }
             onMouseMove={(e) =>
@@ -58,6 +67,7 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
                     offset,
                     isResizing,
                     resizeDirection,
+                    startResizing,
                 )
             }
             onMouseUp={() =>
@@ -72,6 +82,7 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
                     setDraggedWidgetId,
                     setSize,
                     setPosition,
+                    setStartResizing,
                 )
             }
         >

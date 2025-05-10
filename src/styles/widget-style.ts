@@ -11,8 +11,6 @@ export const BaseBg = styled.div.attrs<WidgetStyleProps>((props) => ({
     },
 }))`
     position: absolute;
-
-    cursor: move;
     overflow: hidden;
 
     display: flex;
@@ -21,7 +19,6 @@ export const BaseBg = styled.div.attrs<WidgetStyleProps>((props) => ({
     align-items: center;
 
     background-color: ${(props) => props.theme.widgetColor};
-    padding: 1rem;
     border-radius: 1rem;
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
 `;
@@ -35,15 +32,18 @@ export const StyledCell = styled.td`
     border: 0.2rem solid #ccc;
     padding: 0.2rem;
     text-align: center;
+    font-size: 0.6rem;
 `;
 
 // 텍스트 블록 위젯 스타일
 export const TextBlock = styled.textarea`
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     border: none;
     resize: none;
     white-space: pre-wrap;
+    border: 0.1rem solid #ccc;
+    border-radius: 1rem;
 `;
 
 // 라인 차트 위젯 스타일

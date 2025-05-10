@@ -1,16 +1,19 @@
 import { Dispatch, SetStateAction } from 'react';
-import { ResizeProps } from '../types/widgetTypes';
+import { ResizeProps, ResizingPositionProps, widgetPositionProps } from '../types/widgetTypes';
+
+const padding = 10;
 
 export const handleMouseDown = (
     e: React.MouseEvent,
     setIsDragging: Dispatch<SetStateAction<boolean>>,
     setOffset: Dispatch<SetStateAction<{ offsetX: number; offsetY: number }>>,
     setDraggedWidgetId: Dispatch<SetStateAction<string | null>>,
-    localPosition: { x: number; y: number; w: number; h: number },
+    localPosition: widgetPositionProps,
     setIsResizing: Dispatch<SetStateAction<boolean>>,
     setResizeDirection: Dispatch<SetStateAction<ResizeProps>>,
     widgetId: string,
     bringToFront: (id: string) => void,
+    setStartResizing: Dispatch<SetStateAction<ResizingPositionProps>>,
 ) => {
     // 드래그 설정
     e.stopPropagation();
@@ -25,7 +28,6 @@ export const handleMouseDown = (
     const offsetY = e.clientY - localPosition.y;
     setOffset({ offsetX, offsetY });
 
-    const padding = 40;
     // 마우스 클릭이 리사이즈 위치인지 확인
     const resizeLeft =
         e.clientX >= localPosition.x - padding && e.clientX <= localPosition.x + padding;
@@ -42,6 +44,14 @@ export const handleMouseDown = (
     //console.log('start: ', resizeLeft, resizeRight, resizeTop, resizeBottom);
     if (resizeLeft || resizeRight || resizeTop || resizeBottom) {
         setIsResizing(true);
+        setStartResizing({
+            x: localPosition.x,
+            y: localPosition.y,
+            w: localPosition.w,
+            h: localPosition.h,
+            mouseX: e.clientX,
+            mouseY: e.clientY,
+        }); // 리사이징 시작 위치 설정
         setResizeDirection({
             left: resizeLeft,
             right: resizeRight,
@@ -56,34 +66,75 @@ export const handleMouseDown = (
 export const handleMouseMove = (
     e: React.MouseEvent,
     isDragging: boolean,
-    localPosition: { x: number; y: number; w: number; h: number },
-    setLocalPosition: Dispatch<SetStateAction<{ x: number; y: number; w: number; h: number }>>,
+    localPosition: widgetPositionProps,
+    setLocalPosition: Dispatch<SetStateAction<widgetPositionProps>>,
     offset: { offsetX: number; offsetY: number },
     isResizing: boolean,
     resizeDirection: { left: boolean; right: boolean; top: boolean; bottom: boolean },
+    startResizing: ResizingPositionProps,
 ) => {
+    // 마우스 클릭이 리사이즈 위치인지 확인
+    const resizeLeft =
+        e.clientX >= localPosition.x - padding && e.clientX <= localPosition.x + padding;
+    const resizeRight =
+        e.clientX >= localPosition.x + localPosition.w - padding &&
+        e.clientX <= localPosition.x + localPosition.w + padding;
+    const resizeTop =
+        e.clientY >= localPosition.y - padding && e.clientY <= localPosition.y + padding;
+    const resizeBottom =
+        e.clientY >= localPosition.y + localPosition.h - padding &&
+        e.clientY <= localPosition.y + localPosition.h + padding;
+
+    // 마우스 커서 스타일 수정
+    if (resizeLeft && resizeTop) {
+        document.body.style.cursor = 'nwse-resize';
+    } else if (resizeRight && resizeBottom) {
+        document.body.style.cursor = 'nwse-resize';
+    } else if (resizeLeft && resizeBottom) {
+        document.body.style.cursor = 'nesw-resize';
+    } else if (resizeRight && resizeTop) {
+        document.body.style.cursor = 'nesw-resize';
+    } else if (resizeLeft || resizeRight) {
+        document.body.style.cursor = 'ew-resize';
+    } else if (resizeTop || resizeBottom) {
+        document.body.style.cursor = 'ns-resize';
+    } else {
+        document.body.style.cursor = 'move';
+    }
+
     // 사이즈 조정
     if (isResizing) {
+        const curX = e.clientX;
+        const curY = e.clientY;
+
         if (resizeDirection.left) {
-            const newWidth = localPosition.w - (e.clientX - localPosition.x);
+            const delta = curX - startResizing.mouseX;
+            const newWidth = startResizing.w - delta;
             if (newWidth > 0) {
-                setLocalPosition((prev) => ({ ...prev, x: e.clientX, w: newWidth }));
+                setLocalPosition((prev) => ({ ...prev, x: startResizing.x + delta, w: newWidth }));
             }
         }
         if (resizeDirection.right) {
-            const newWidth = e.clientX - localPosition.x;
+            const delta = curX - startResizing.mouseX;
+            const newWidth = startResizing.w + delta;
             if (newWidth > 0) {
                 setLocalPosition((prev) => ({ ...prev, w: newWidth }));
             }
         }
         if (resizeDirection.top) {
-            const newHeight = localPosition.h - (e.clientY - localPosition.y);
+            const delta = curY - startResizing.mouseY;
+            const newHeight = startResizing.h - delta;
             if (newHeight > 0) {
-                setLocalPosition((prev) => ({ ...prev, y: e.clientY, h: newHeight }));
+                setLocalPosition((prev) => ({
+                    ...prev,
+                    y: startResizing.y + delta,
+                    h: newHeight,
+                }));
             }
         }
         if (resizeDirection.bottom) {
-            const newHeight = e.clientY - localPosition.y;
+            const delta = curY - startResizing.mouseY;
+            const newHeight = startResizing.h + delta;
             if (newHeight > 0) {
                 setLocalPosition((prev) => ({ ...prev, h: newHeight }));
             }
@@ -106,6 +157,7 @@ export const handleMouseUp = (
     setDraggedWidgetId: Dispatch<SetStateAction<string | null>>,
     setSize: (id: string, w: number, h: number) => void,
     setPosition: (id: string, x: number, y: number) => void,
+    setStartResizing: Dispatch<SetStateAction<ResizingPositionProps>>,
 ) => {
     if (isResizing && draggedWidgetId != null) {
         // 사이즈 상태 업데이트
@@ -127,4 +179,5 @@ export const handleMouseUp = (
     }
     setIsDragging(false);
     setDraggedWidgetId(null);
+    setStartResizing({ x: 0, y: 0, w: 0, h: 0, mouseX: 0, mouseY: 0 });
 };
