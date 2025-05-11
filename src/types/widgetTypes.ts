@@ -27,11 +27,7 @@ export interface widgetPositionProps {
     h: number;
 }
 
-export interface ResizingPositionProps {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
+export interface ResizingPositionProps extends widgetPositionProps {
     mouseX: number;
     mouseY: number;
 }
