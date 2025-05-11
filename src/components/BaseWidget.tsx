@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 import { BaseBg } from '../styles/widget-style';
 import { ResizeProps, WidgetProps } from '../types/widgetTypes';
-import { handleMouseDown, handleMouseMove, handleMouseUp } from '../utils/mouseHandlers';
+import {
+    handleMouseCursor,
+    handleMouseDown,
+    handleMouseMove,
+    handleMouseUp,
+} from '../utils/mouseHandlers';
 import { useWidgetStore } from '../store/widgetStore';
 import { useShallow } from 'zustand/react/shallow';
 import { memo } from 'react';
@@ -101,6 +106,7 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
                     setStartResizing,
                 )
             }
+            onMouseMove={(e) => handleMouseCursor(e, localPosition)}
         >
             <BaseBg
                 $x={localPosition.x}

@@ -63,16 +63,7 @@ export const handleMouseDown = (
     }
 };
 
-export const handleMouseMove = (
-    e: MouseEvent,
-    isDragging: boolean,
-    localPosition: widgetPositionProps,
-    setLocalPosition: Dispatch<SetStateAction<widgetPositionProps>>,
-    offset: { offsetX: number; offsetY: number },
-    isResizing: boolean,
-    resizeDirection: { left: boolean; right: boolean; top: boolean; bottom: boolean },
-    startResizing: ResizingPositionProps,
-) => {
+export const handleMouseCursor = (e: React.MouseEvent, localPosition: widgetPositionProps) => {
     // 마우스 클릭이 리사이즈 위치인지 확인
     const resizeLeft =
         e.clientX >= localPosition.x - padding && e.clientX <= localPosition.x + padding;
@@ -101,7 +92,18 @@ export const handleMouseMove = (
     } else {
         document.body.style.cursor = 'move';
     }
+};
 
+export const handleMouseMove = (
+    e: MouseEvent,
+    isDragging: boolean,
+    localPosition: widgetPositionProps,
+    setLocalPosition: Dispatch<SetStateAction<widgetPositionProps>>,
+    offset: { offsetX: number; offsetY: number },
+    isResizing: boolean,
+    resizeDirection: { left: boolean; right: boolean; top: boolean; bottom: boolean },
+    startResizing: ResizingPositionProps,
+) => {
     // 사이즈 조정
     if (isResizing) {
         const curX = e.clientX;
