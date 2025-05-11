@@ -20,8 +20,7 @@ export const saveJSONFile = (widgets: Widget[]) => {
         };
 
         transaction.onerror = (event) => {
-            console.error('위젯 저장 실패', event);
-            Toast.error('저장 실패');
+            Toast.error('위젯의 저장을 실패했습니다.');
         };
     };
 
@@ -52,7 +51,6 @@ export const saveJSONFile = (widgets: Widget[]) => {
             };
 
             upgradeRequest.onerror = (event) => {
-                console.error('DB 버전 업그레이드 중 오류 발생', event);
                 Toast.error('저장 실패: DB 버전 업그레이드 오류');
             };
         } else {
@@ -60,7 +58,7 @@ export const saveJSONFile = (widgets: Widget[]) => {
         }
     };
     request.onerror = (event) => {
-        console.error('위젯 불러오는 과정에 오류 발생', event);
+        Toast.error('위젯을 불러오는 과정에 오류가 발생했습니다.');
     };
 };
 
@@ -85,7 +83,7 @@ export const loadJSONFile = (setWidget: (widgets: Widget[]) => void) => {
             Toast.success('저장한 위젯을 불러왔습니다.');
         };
         getRequest.onerror = (event) => {
-            console.error('위젯 불러오는 과정에 오류 발생', event);
+            Toast.error('위젯을 불러오는 과정에 오류가 발생했습니다.');
         };
     };
 };
