@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BaseBg } from '../styles/widget-style';
 import { ResizeProps, WidgetProps } from '../types/widgetTypes';
 import { handleMouseDown, handleMouseMove, handleMouseUp } from '../utils/mouseHandlers';
@@ -42,6 +42,49 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
         mouseY: 0,
     });
 
+    // 이벤트 리스너
+    const handleMouseMoveFunc = (e: MouseEvent) => {
+        if (isDragging || isResizing) {
+            handleMouseMove(
+                e,
+                isDragging,
+                localPosition,
+                setLocalPosition,
+                offset,
+                isResizing,
+                resizeDirection,
+                startResizing,
+            );
+        }
+    };
+
+    const handleMouseUpFunc = () => {
+        if (isDragging || isResizing) {
+            handleMouseUp(
+                isDragging,
+                isResizing,
+                draggedWidgetId,
+                localPosition,
+                setIsDragging,
+                setIsResizing,
+                setResizeDirection,
+                setDraggedWidgetId,
+                setSize,
+                setPosition,
+                setStartResizing,
+            );
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousemove', handleMouseMoveFunc);
+        document.addEventListener('mouseup', handleMouseUpFunc);
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMoveFunc);
+            document.removeEventListener('mouseup', handleMouseUpFunc);
+        };
+    }, [isDragging, isResizing]);
+
     return (
         <div
             onMouseDown={(e) =>
@@ -55,33 +98,6 @@ const BaseWidget = ({ widget, children }: WidgetProps) => {
                     setResizeDirection,
                     widget.id,
                     bringToFront,
-                    setStartResizing,
-                )
-            }
-            onMouseMove={(e) =>
-                handleMouseMove(
-                    e,
-                    isDragging,
-                    localPosition,
-                    setLocalPosition,
-                    offset,
-                    isResizing,
-                    resizeDirection,
-                    startResizing,
-                )
-            }
-            onMouseUp={() =>
-                handleMouseUp(
-                    isDragging,
-                    isResizing,
-                    draggedWidgetId,
-                    localPosition,
-                    setIsDragging,
-                    setIsResizing,
-                    setResizeDirection,
-                    setDraggedWidgetId,
-                    setSize,
-                    setPosition,
                     setStartResizing,
                 )
             }

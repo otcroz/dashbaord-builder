@@ -64,7 +64,7 @@ export const handleMouseDown = (
 };
 
 export const handleMouseMove = (
-    e: React.MouseEvent,
+    e: MouseEvent,
     isDragging: boolean,
     localPosition: widgetPositionProps,
     setLocalPosition: Dispatch<SetStateAction<widgetPositionProps>>,
