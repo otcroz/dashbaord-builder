@@ -44,6 +44,7 @@ export const TextBlock = styled.textarea`
     white-space: pre-wrap;
     border: 0.1rem solid #ccc;
     border-radius: 1rem;
+    padding: 0.5rem;
 `;
 
 // 라인 차트 위젯 스타일
