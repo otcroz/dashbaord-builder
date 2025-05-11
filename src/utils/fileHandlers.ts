@@ -82,6 +82,7 @@ export const loadJSONFile = (setWidget: (widgets: Widget[]) => void) => {
             const data = (event.target as IDBRequest).result;
             setWidget(data[0].data); // 배열 불러오기
             console.log('위젯 불러오기 완료', data[0].data);
+            Toast.success('저장한 위젯을 불러왔습니다.');
         };
         getRequest.onerror = (event) => {
             console.error('위젯 불러오는 과정에 오류 발생', event);
